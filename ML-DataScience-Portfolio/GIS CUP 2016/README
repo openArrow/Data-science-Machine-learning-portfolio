@@ -1,0 +1,10 @@
+Scala code to run jar:
+1. Start spark shell with the --jars <path_to_geospark_group18.jar>
+2. Execute the following commands:
+	import org.datasyslab.geospark.spatialOperator.JoinQuery;
+	import org.datasyslab.geospark.spatialRDD.RectangleRDD;
+	import org.datasyslab.geospark.spatialRDD.PointRDD;
+	val pointRDD = new PointRDD(sc,"<path_to_arealm.csv>",0,"csv","rtree",2);
+	val rectangleRDD = new RectangleRDD(sc,"<path_to_zcta.csv>",0,"csv");
+	val joinQuery = new JoinQuery(sc,pointRDD,rectangleRDD);
+	val result = joinQuery.SpatialJoinQueryUsingCartesianProduct(pointRDD,rectangleRDD).count();
